@@ -2,6 +2,7 @@ describe('pdf_to_png test', () => {
   const pdfFile = 'exercise.pdf';
 
   it('renders pdf', () => {
+    cy.viewport(1000, 1500);
     cy.visit('/');
     cy.contains('PDF to PNG client-side conversion');
     cy.get('.react-pdf__Document').should('not.exist');
@@ -12,5 +13,7 @@ describe('pdf_to_png test', () => {
     // wait for pdf canvas render
     cy.get('.react-pdf__Document').should('exist');
     cy.get('a').should('exist', 'download file');
+    cy.contains('download file').click();
+    // manually examine cypress/downloads/ png file
   });
 });
